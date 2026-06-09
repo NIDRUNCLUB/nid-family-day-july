@@ -258,7 +258,7 @@
 </div>
 <div class="footer">© NID RUN CLUB · 恩艾迪有限公司 · FAMILY DAY '26</div>
 <script>
-  const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbxqRqpWkvhRoan12UhhbhYnJ2UK_gIqucJ4wmSn3YIQamNEvM8Io8aP8Mr4rE3AWJgy/exec'; // 填入你的 Apps Script 部署網址
+  const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbztCLrhf-P4MusUTMjQ-aBvQSp2-s1QwhxF8ybYlFAQQl2gz8DORr96K8X7yZh-Jzpr/exec';
 
   async function fetchCount() {
     if (!SHEETS_API_URL) {
@@ -288,9 +288,10 @@
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+
     const required = form.querySelectorAll('[required]');
     let valid = true;
-    required.forEach(el => {
+    required.forEach(function(el) {
       if (!el.value.trim()) { el.style.borderColor = '#e24b4a'; valid = false; }
       else { el.style.borderColor = ''; }
     });
@@ -300,7 +301,8 @@
     btn.textContent = '送出中...';
     btn.disabled = true;
 
-    const payload = {
+    const params = new URLSearchParams({
+      action: 'submit',
       name: document.getElementById('name').value,
       classGroup: document.getElementById('classSelect').value,
       email: document.getElementById('email').value,
@@ -309,23 +311,25 @@
       memberNum: document.getElementById('memberNum').value,
       role: document.getElementById('role').value,
       reason: document.getElementById('reason').value
-    };
-
-    fetch(SHEETS_API_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(() => {
-      formSection.style.display = 'none';
-      successSection.style.display = 'block';
-      successSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(fetchCount, 1500);
-    }).catch(() => {
-      btn.textContent = '報名接力 →';
-      btn.disabled = false;
-      alert('送出失敗，請稍後再試');
     });
+
+    fetch(SHEETS_API_URL + '?' + params.toString())
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          formSection.style.display = 'none';
+          successSection.style.display = 'block';
+          successSection.scrollIntoView({ behavior: 'smooth' });
+          fetchCount();
+        } else {
+          throw new Error('送出失敗');
+        }
+      })
+      .catch(function(err) {
+        btn.textContent = '報名接力 →';
+        btn.disabled = false;
+        alert('送出失敗，請稍後再試或聯絡 NID 官方帳號');
+      });
   });
 
   form.querySelectorAll('input, select').forEach(el => {
