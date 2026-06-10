@@ -100,23 +100,29 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:44px;
+  gap:32px;
   margin-bottom:44px;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 .logo-divider{
   width:2px;
-  height:100px;
+  height:70px;
   background:linear-gradient(to bottom,transparent,var(--lane),transparent);
   flex-shrink:0;
 }
 .nid-logo img{
-  height:140px;width:auto;display:block;
+  height:90px;width:auto;display:block;
 }
 .dazzle-logo img{
-  height:130px;width:auto;display:block;
+  height:80px;width:auto;display:block;
   filter:brightness(0) invert(1);
   opacity:0.92;
+}
+@media(min-width:480px){
+  .logo-row{ gap:44px; }
+  .logo-divider{ height:100px; }
+  .nid-logo img{ height:140px; }
+  .dazzle-logo img{ height:130px; }
 }
 .dazzle-text{
   display:none;
@@ -443,6 +449,28 @@ option{background:var(--surface);}
   border:1px dashed var(--border);
   border-radius:8px;
 }
+/* 社群連結 */
+.community-block{
+  margin-top:20px;
+  background:linear-gradient(135deg,rgba(6,199,85,0.12),rgba(6,199,85,0.05));
+  border:1px solid rgba(6,199,85,0.4);
+  border-radius:14px;
+  padding:20px 24px;
+  text-align:center;
+}
+.community-block p{
+  font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6;
+}
+.community-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#06C755;color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:16px;letter-spacing:0.06em;
+  text-transform:uppercase;text-decoration:none;
+  padding:12px 28px;border-radius:100px;
+  transition:opacity 0.2s,transform 0.1s;
+}
+.community-btn:hover{opacity:0.9;transform:translateY(-1px);}
 
 .divider{
   height:1px;
@@ -562,6 +590,18 @@ option{background:var(--surface);}
       📍 地點：<strong>台師大校本部田徑場，台北市大安區和平東路一段162號</strong><br>
       👕 賽衣將依填寫尺寸製作，報名後如需更改請聯絡主辦
     </div>
+
+    <!-- 社群連結 -->
+    <div class="community-block">
+      <p>加入 NID Family Day 資訊站<br>掌握最新活動資訊、注意事項及賽前通知</p>
+      <a class="community-btn"
+         href="https://line.me/ti/g2/5BBOmVbrCiD6m8Uzy6xigwzM1qihEJ_U0JUcKA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+         target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.05 2 11.08c0 4.5 3.44 8.26 8.14 9.05.32.06.75.18.86.42.1.22.07.56.03.78l-.14.82c-.04.24-.2.94.82.51 1.02-.43 5.52-3.25 7.53-5.56C20.73 15.3 22 13.3 22 11.08 22 6.05 17.52 2 12 2z"/></svg>
+        加入 LINE 社群
+      </a>
+    </div>
+
     <div class="screenshot-hint">📸 建議截圖儲存此頁面作為報名憑證</div>
   </div>
 </div>
