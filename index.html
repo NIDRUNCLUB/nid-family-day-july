@@ -322,7 +322,101 @@ option{background:var(--surface);}
 }
 .consent-text{font-size:13px;color:var(--muted);line-height:1.6;}
 
-/* ── SUBMIT ── */
+/* ── 非當期學員付費提示 ── */
+.fee-notice{
+  background:rgba(255,107,43,0.10);
+  border:1px solid rgba(255,107,43,0.4);
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:13px;
+  color:var(--text);
+  line-height:1.7;
+  margin-bottom:20px;
+}
+.fee-notice strong{ color:var(--orange); }
+.fee-notice .bank-info{
+  margin-top:10px;
+  background:rgba(0,0,0,0.3);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.8;
+}
+.fee-notice .bank-info strong{ color:var(--text); }
+/* 是否學員 radio row */
+.member-row{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+.member-radio{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 12px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  color:var(--muted);
+  transition:border-color 0.2s, color 0.2s, background 0.2s;
+  user-select:none;
+}
+.member-radio input{ display:none; }
+.member-radio.is-yes.selected{
+  border-color:var(--teal);
+  color:var(--teal);
+  background:rgba(0,212,170,0.1);
+}
+.member-radio.is-no.selected{
+  border-color:var(--orange);
+  color:var(--orange);
+  background:rgba(255,107,43,0.1);
+}
+/* 付費展開區 */
+.nonmember-extra{
+  display:none;
+  margin-top:12px;
+  background:rgba(255,107,43,0.07);
+  border:1px solid rgba(255,107,43,0.3);
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:12px;
+  color:var(--text);
+  line-height:1.7;
+}
+.nonmember-extra .pay-note{
+  color:var(--orange);
+  font-weight:700;
+  margin-bottom:8px;
+  font-size:13px;
+}
+.nonmember-extra .bank-detail{
+  background:rgba(0,0,0,0.3);
+  border-radius:6px;
+  padding:8px 12px;
+  color:var(--muted);
+  margin-bottom:10px;
+  line-height:1.8;
+}
+.nonmember-extra .bank-detail strong{ color:var(--text); }
+/* 步驟說明 note */
+.step-note{
+  background:rgba(200,134,10,0.10);
+  border:1px solid rgba(200,134,10,0.35);
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:13px;
+  color:var(--text);
+  line-height:1.7;
+  margin-top:20px;
+}
+.step-note strong{ color:var(--lane); }
 .submit-btn{
   width:100%;
   background:var(--track);
@@ -612,11 +706,13 @@ option{background:var(--surface);}
   <div class="team-section">
     <p class="section-label">Step 01</p>
     <h2 class="section-title">隊伍資訊</h2>
-    <div class="field-group" style="grid-template-columns:1fr;">
+
+    <!-- 戰隊選擇 下拉 -->
+    <div class="field-group" style="grid-template-columns:1fr;margin-bottom:16px;">
       <div>
-        <label for="teamName">隊伍名稱 <span style="color:var(--lane)">*</span></label>
-        <select id="teamName" required>
-          <option value="">請選擇隊伍名稱</option>
+        <label for="teamGroup">戰隊選擇 <span style="color:var(--lane)">*</span></label>
+        <select id="teamGroup" required>
+          <option value="">請選擇所屬戰隊</option>
           <option>凱為戰隊</option><option>承勳戰隊</option><option>智遠戰隊</option>
           <option>姚姚戰隊</option><option>阿飛戰隊</option><option>竺均戰隊</option>
           <option>柏鈞戰隊</option><option>佩珊戰隊</option><option>明志戰隊</option>
@@ -624,6 +720,15 @@ option{background:var(--surface);}
         </select>
       </div>
     </div>
+
+    <!-- 自訂戰隊名稱 -->
+    <div class="field-group" style="grid-template-columns:1fr;margin-bottom:16px;">
+      <div>
+        <label for="teamName">戰隊名稱 <span style="color:var(--lane)">*</span></label>
+        <input type="text" id="teamName" placeholder="輸入本次出賽隊伍全名（可自訂）" required/>
+      </div>
+    </div>
+
     <div class="field-group">
       <div>
         <label for="captainName">隊長姓名 <span style="color:var(--lane)">*</span></label>
@@ -639,6 +744,14 @@ option{background:var(--surface);}
         <label for="captainEmail">隊長 Email <span style="color:var(--lane)">*</span></label>
         <input type="email" id="captainEmail" placeholder="example@email.com" required/>
       </div>
+    </div>
+
+    <!-- 非學員說明 -->
+    <div class="step-note">
+      📋 <strong>重要說明 — 非當期學員參與規定</strong><br>
+      每隊最多可有 <strong>2 位非當期學員</strong>參與，以保障當期學員的參與權益。<br>
+      非當期學員需額外付費 <strong>NT$200</strong>，可獲得：<strong>活動紀念衣 + 參與禮包</strong>。<br>
+      請在下方名單中如實填寫每位選手的學員身份，超過 2 位非學員將無法送出表單。
     </div>
   </div>
 
@@ -983,12 +1096,19 @@ updateCountdown();
 setInterval(updateCountdown, 60000);
 
 // ── 渲染名單 ──
+const BANK_HTML = `
+  <div class="bank-detail">
+    戶名：<strong>江凱為</strong><br>
+    銀行：<strong>822 中國信託｜瑞光分行</strong><br>
+    帳號：<strong>7165-4022-7006</strong>
+  </div>`;
+
 function renderRoster(){
   const c = document.getElementById('roster');
   c.innerHTML='';
   for(let i=1;i<=10;i++){
     c.innerHTML+=`
-      <div class="runner-card">
+      <div class="runner-card" id="card_${i}">
         <div class="runner-header">
           <div class="runner-num c${i}">${i}</div>
           <div class="runner-title">第 ${i} 棒選手</div>
@@ -1006,10 +1126,42 @@ function renderRoster(){
             </select>
           </div>
         </div>
+        <!-- 是否當期學員 -->
+        <div style="margin-top:12px;">
+          <label style="margin-bottom:6px;">是否為當期學員 <span style="color:var(--lane)">*</span></label>
+          <div class="member-row">
+            <label class="member-radio is-yes" id="label_yes_${i}" onclick="setMember(${i},'yes')">
+              <input type="radio" name="member_${i}" value="yes"/> ✅ 是，當期學員
+            </label>
+            <label class="member-radio is-no" id="label_no_${i}" onclick="setMember(${i},'no')">
+              <input type="radio" name="member_${i}" value="no"/> ❌ 否，非學員
+            </label>
+          </div>
+          <!-- 非學員付費區 -->
+          <div class="nonmember-extra" id="extra_${i}">
+            <div class="pay-note">💰 需付費 NT$200｜可獲得活動紀念衣 + 參與禮包</div>
+            ${BANK_HTML}
+            <label for="txn_${i}" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block;">
+              匯款後五碼 <span style="color:var(--lane)">*</span>
+            </label>
+            <input type="text" id="txn_${i}" placeholder="請輸入匯款後五碼" maxlength="5"
+              style="width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;padding:12px 16px;outline:none;"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+          </div>
+        </div>
       </div>`;
   }
 }
 renderRoster();
+
+// 切換學員狀態
+function setMember(i, val){
+  document.getElementById(`label_yes_${i}`).classList.toggle('selected', val==='yes');
+  document.getElementById(`label_no_${i}`).classList.toggle('selected', val==='no');
+  document.getElementById(`extra_${i}`).style.display = val==='no' ? 'block' : 'none';
+  // 更新 radio
+  document.querySelector(`input[name="member_${i}"][value="${val}"]`).checked = true;
+}
 
 // ── 載入已報名隊數 ──
 async function loadTeamCount(){
@@ -1041,14 +1193,12 @@ loadTeamCount();
 
 // ── 顯示確認畫面 ──
 function showSuccessScreen(data){
-  // 填入隊伍資訊
-  document.getElementById('sc-team').textContent    = data.teamName;
+  document.getElementById('sc-team').textContent    = `${data.teamGroup} ／ ${data.teamName}`;
   document.getElementById('sc-captain').textContent = data.captainName;
   document.getElementById('sc-phone').textContent   = data.captainPhone;
   document.getElementById('sc-email').textContent   = data.captainEmail;
   document.getElementById('sc-email2').textContent  = data.captainEmail;
 
-  // 填入名單 grid
   const grid = document.getElementById('sc-roster');
   grid.innerHTML = data.runners.map((r,i) => `
     <div class="success-runner">
@@ -1056,11 +1206,12 @@ function showSuccessScreen(data){
       <div class="success-runner-info">
         <div class="success-runner-name">${r.name}</div>
         <span class="success-runner-size">${r.size}</span>
+        <span style="display:inline-block;margin-left:4px;font-size:10px;padding:1px 6px;border-radius:3px;background:${r.isMember?'rgba(0,212,170,0.2)':'rgba(255,107,43,0.2)'};color:${r.isMember?'var(--teal)':'var(--orange)'};">${r.isMember?'學員':'非學員'}</span>
+        ${!r.isMember ? `<span style="display:block;font-size:11px;color:var(--muted);margin-top:2px;">匯款後五碼：${r.txn}</span>` : ''}
       </div>
     </div>
   `).join('');
 
-  // 顯示確認畫面，隱藏表單
   document.getElementById('formWrap').style.display    = 'none';
   document.getElementById('successScreen').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1069,13 +1220,15 @@ function showSuccessScreen(data){
 // ── 送出報名 ──
 async function handleSubmit(){
   const btn          = document.getElementById('submitBtn');
+  const teamGroup    = document.getElementById('teamGroup').value.trim();
   const teamName     = document.getElementById('teamName').value.trim();
   const captainName  = document.getElementById('captainName').value.trim();
   const captainPhone = document.getElementById('captainPhone').value.trim();
   const captainEmail = document.getElementById('captainEmail').value.trim();
   const consent      = document.getElementById('consent').checked;
 
-  if(!teamName)    { showMsg('error','請選擇隊伍名稱。'); return; }
+  if(!teamGroup)   { showMsg('error','請選擇戰隊。'); return; }
+  if(!teamName)    { showMsg('error','請填寫戰隊名稱。'); return; }
   if(!captainName) { showMsg('error','請填寫隊長姓名。'); return; }
   if(!captainPhone){ showMsg('error','請填寫隊長聯絡電話。'); return; }
   if(!captainEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(captainEmail)){
@@ -1083,12 +1236,24 @@ async function handleSubmit(){
   }
   if(!consent){ showMsg('error','請同意活動規則後再送出。'); return; }
 
+  // 收集選手資料 + 驗證
   const runners = [];
+  let nonMemberCount = 0;
   for(let i=1;i<=10;i++){
-    const name = document.getElementById(`name_${i}`).value.trim();
-    const size = document.getElementById(`size_${i}`).value;
+    const name   = document.getElementById(`name_${i}`).value.trim();
+    const size   = document.getElementById(`size_${i}`).value;
+    const radio  = document.querySelector(`input[name="member_${i}"]:checked`);
     if(!name||!size){ showMsg('error',`第 ${i} 棒選手的姓名或尺寸未填寫。`); return; }
-    runners.push({ position:i, name, size });
+    if(!radio){ showMsg('error',`第 ${i} 棒選手未選擇是否為當期學員。`); return; }
+    const isMember = radio.value === 'yes';
+    let txn = '';
+    if(!isMember){
+      nonMemberCount++;
+      if(nonMemberCount > 2){ showMsg('error','非當期學員最多 2 位，請確認名單後再送出。'); return; }
+      txn = document.getElementById(`txn_${i}`).value.trim();
+      if(!txn || txn.length !== 5){ showMsg('error',`第 ${i} 棒非學員選手請填寫匯款後五碼（5位數字）。`); return; }
+    }
+    runners.push({ position:i, name, size, isMember, txn });
   }
 
   btn.disabled = true;
@@ -1096,26 +1261,23 @@ async function handleSubmit(){
 
   const params = new URLSearchParams();
   params.append('action',       'submit');
+  params.append('teamGroup',    teamGroup);
   params.append('teamName',     teamName);
   params.append('captainName',  captainName);
   params.append('captainPhone', captainPhone);
   params.append('captainEmail', captainEmail);
   params.append('timestamp',    new Date().toLocaleString('zh-TW',{timeZone:'Asia/Taipei'}));
   runners.forEach(r => {
-    params.append(`runner${r.position}_name`, r.name);
-    params.append(`runner${r.position}_size`, r.size);
+    params.append(`runner${r.position}_name`,     r.name);
+    params.append(`runner${r.position}_size`,     r.size);
+    params.append(`runner${r.position}_member`,   r.isMember ? '是' : '否');
+    params.append(`runner${r.position}_txn`,      r.txn || '');
   });
 
   try{
     const res  = await fetch(`${API_URL}?${params.toString()}`);
     const data = await res.json();
 
-    if(data.status === 'duplicate'){
-      showMsg('error', `「${teamName}」已經報名過了，如需修改請聯絡主辦。`);
-      btn.disabled = false;
-      btn.textContent = '送出報名表單';
-      return;
-    }
     if(data.status === 'full'){
       showMsg('error','很抱歉，報名名額已滿！');
       btn.disabled = true;
@@ -1124,7 +1286,7 @@ async function handleSubmit(){
       return;
     }
     // 成功
-    showSuccessScreen({ teamName, captainName, captainPhone, captainEmail, runners });
+    showSuccessScreen({ teamGroup, teamName, captainName, captainPhone, captainEmail, runners });
     loadTeamCount();
 
   }catch(e){
