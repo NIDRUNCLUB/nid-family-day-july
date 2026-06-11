@@ -842,9 +842,32 @@ option{background:var(--surface);}
   <div class="divider"></div>
 
   <div class="consent-section">
+    <!-- 下拉免責聲明 -->
+    <div style="margin-bottom:16px;">
+      <button type="button" id="disclaimerToggle" onclick="toggleDisclaimer()"
+        style="width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;cursor:pointer;color:var(--text);font-size:13px;font-weight:600;">
+        <span>📋 活動免責聲明與參加規範（點擊展開閱讀）</span>
+        <span id="disclaimerArrow" style="transition:transform 0.3s;font-size:12px;">▼</span>
+      </button>
+      <div id="disclaimerBody" style="display:none;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:18px 20px;background:var(--card);font-size:12.5px;color:var(--muted);line-height:1.85;max-height:360px;overflow-y:auto;">
+        <p style="margin:0 0 10px;"><strong>1.</strong> 本人出於自由意志同意參與恩艾迪有限公司主辦的活動。本人已詳細閱覽本活動相關說明及規定，知悉本活動具有一定的風險，本人同意承擔本活動可能發生之所有風險。本活動可能發生的風險包括但不限於活動過程中可能會有推擠、碰撞、翻滾等行為，且該等行為可能會造成人身上傷害及財產上損失。</p>
+        <p style="margin:0 0 10px;"><strong>2.</strong> 為將本活動可能產生之風險降至最低，本人遵守本活動相關規定及配合工作人員的指示，做好自我管理，避免造成自己或他人人身上傷害或財產上損失，並承諾在本活動期間不會從事不正當行為。如有違反，恩艾迪有限公司及其人員有權禁止本人參與活動，並無庸負擔任何損害賠償責任。</p>
+        <p style="margin:0 0 10px;"><strong>3.</strong> 本人知悉本活動不包含保險，如須個人保險，請自行加保。</p>
+        <p style="margin:0 0 10px;"><strong>4.</strong> 本人同意並授權恩艾迪有限公司拍攝、使用、改做、修飾、公開展示本人之肖像（包含照片及視訊影像）、名字、聲音…等，於本活動中所拍攝之作品。本人同意恩艾迪有限公司就上述著作享有完整之著作權，其被授權人及繼受人得使用本人之肖像、名字、聲音…等於所有形式的著作載體及媒體，並得以各種管道或印刷方式呈現授權內容之全部或部分、公開發表，無須再通知或經由本人同意。（若不希望工作室使用，請提前告知）</p>
+        <p style="margin:0 0 10px;"><strong>5.</strong> 本人聲明並保證健康狀況良好，無心臟病、高血壓、糖尿病、氣喘及其他重大疾病；健康狀況適合參加本活動。若活動中發生任何意外事件，願自行負責。</p>
+        <p style="margin:0 0 10px;"><strong>6.</strong> 主辦單位保有修改、變更或暫停本活動之權利，如有未盡事宜，悉依主辦單位相關規定或解釋，並得隨時補充公告之。參加者一旦參加本活動，則表示同意接受本辦法之規範。</p>
+        <p style="margin:0 0 10px;"><strong>7.</strong> 活動相關及寄物說明：</p>
+        <p style="margin:0 0 4px;padding-left:16px;">（1）除台北市政府人事行政局發布停班停課外，若天氣預報活動當日為「雨天」，將會提前通知取消，並透過專屬社團及 Email 通知。</p>
+        <p style="margin:0 0 10px;padding-left:16px;">（2）此活動不提供寄物服務，對於隨身物品不負保管責任，若遺失概不負責，請盡量避免攜帶貴重物品。</p>
+        <p style="margin:0 0 10px;"><strong>8.</strong> 本活動不得將名額轉讓他人，若經查證屬實，將取消報名資格。</p>
+        <p style="margin:0 0 10px;"><strong>9.</strong> 完成報名之參加者，視為同意以上聲明。</p>
+        <p style="margin:0;"><strong>10.</strong> 以上活動事項如有未盡事宜，得隨時修訂之，本活動單位保有更動修改之權利。</p>
+      </div>
+    </div>
+    <!-- 打勾確認 -->
     <label class="consent-label">
       <input type="checkbox" id="consent" required/>
-      <span class="consent-text">本人已閱讀並同意 NID Run Club 活動規則。參賽者需自行評估身體狀況，活動中如發生意外，主辦單位於合理範圍內協助處理，但不負全責。主辦單位保留調整活動細節之權利。</span>
+      <span class="consent-text">本人已閱讀並同意上述活動免責聲明與參加規範。</span>
     </label>
   </div>
 
@@ -1286,6 +1309,19 @@ function showSuccessScreen(data){
   document.getElementById('formWrap').style.display    = 'none';
   document.getElementById('successScreen').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── 免責聲明展開/收合 ──
+function toggleDisclaimer(){
+  const body  = document.getElementById('disclaimerBody');
+  const arrow = document.getElementById('disclaimerArrow');
+  const open  = body.style.display === 'none';
+  body.style.display  = open ? 'block' : 'none';
+  arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+  const btn = document.getElementById('disclaimerToggle');
+  btn.querySelector('span:first-child').textContent = open
+    ? '📋 活動免責聲明與參加規範（點擊收合）'
+    : '📋 活動免責聲明與參加規範（點擊展開閱讀）';
 }
 
 // ── 送出報名 ──
