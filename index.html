@@ -700,9 +700,9 @@ option{background:var(--surface);}
       <div class="gift-card-title">🎁 NID Family Day × Dazzle by Mr Apple 參加禮</div>
       <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">每位參加夥伴均可獲得以下禮品：</div>
       <div class="gift-items">
-        <span class="gift-tag">🎒 品牌瑜伽包 ×1</span>
-        <span class="gift-tag">🍶 品牌水壺 ×1</span>
-        <span class="gift-tag">🧢 品牌鴨舌帽 ×1</span>
+        <span class="gift-tag">🎒 Dazzle by Mr Apple 瑜伽包 ×1</span>
+        <span class="gift-tag">🍶 Dazzle by Mr Apple 水壺 ×1</span>
+        <span class="gift-tag">🧢 Dazzle by Mr Apple 鴨舌帽 ×1</span>
         <span class="gift-tag">📄 產品 DM</span>
         <span class="gift-tag">🍎 紐西蘭蘋果 ×1</span>
       </div>
@@ -759,6 +759,19 @@ option{background:var(--surface);}
 
 <!-- FORM -->
 <main class="form-wrap" id="formWrap">
+
+  <!-- 組隊規則 -->
+  <div class="team-section" style="margin-bottom:24px;">
+    <p class="section-label">組隊前必看</p>
+    <h2 class="section-title">組隊規則</h2>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;font-size:14px;line-height:1.9;color:var(--text);">
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+        <li>👑 <strong>隊長統籌</strong>：每隊可推派一人擔任隊長，負責協助表單填寫、組隊聯絡、討論隊名，以及建立隊伍群組。</li>
+        <li>👟 <strong>人數規定</strong>：每隊須滿 <strong>10 人</strong>，每人完成一棒 400M。</li>
+        <li>🤝 <strong>外部成員限制</strong>：每隊最多可帶 <strong>2 名非本期學員</strong>的朋友參加，且需額外繳費 <strong>NT$200／人</strong>。</li>
+      </ul>
+    </div>
+  </div>
 
   <div class="team-section">
     <p class="section-label">Step 01</p>
@@ -832,6 +845,11 @@ option{background:var(--surface);}
       <input type="checkbox" id="consent" required/>
       <span class="consent-text">本人已閱讀並同意 NID Run Club 活動規則。參賽者需自行評估身體狀況，活動中如發生意外，主辦單位於合理範圍內協助處理，但不負全責。主辦單位保留調整活動細節之權利。</span>
     </label>
+  </div>
+
+  <!-- 更換隊友說明 -->
+  <div style="background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:var(--text);line-height:1.8;">
+    📝 <strong>更換隊友說明</strong>：報名送出後，如需更換隊友，請於<strong>活動前 2 日</strong>前，私訊小編提出申請，並提供欲更換隊友的<strong>班級及姓名</strong>，逾期恕不受理，以維護其他學員權益。
   </div>
 
   <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">送出報名表單</button>
