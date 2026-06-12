@@ -844,6 +844,72 @@ option{background:var(--surface);}
       </div>
       <span class="roster-note">每隊製作專屬賽衣</span>
     </div>
+
+    <!-- 尺寸說明 + 尺寸表 -->
+    <div style="margin-bottom:20px;">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">
+        🧵 賽衣採<strong>無分男女</strong>版型（Unisex），請依下方尺寸表選擇合適尺寸。
+      </p>
+      <button type="button" id="sizeChartToggle" onclick="toggleSizeChart()"
+        style="width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 16px;cursor:pointer;color:var(--text);font-size:13px;font-weight:600;">
+        <span>📐 點擊查看尺寸表</span>
+        <span id="sizeChartArrow" style="transition:transform 0.3s;font-size:12px;">▼</span>
+      </button>
+      <div id="sizeChartBody" style="display:none;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px;text-align:center;">
+          <thead>
+            <tr style="background:var(--track);color:var(--white);">
+              <th style="padding:10px 8px;font-weight:700;">尺寸</th>
+              <th style="padding:10px 8px;font-weight:700;">胸寬 (cm)</th>
+              <th style="padding:10px 8px;font-weight:700;">肩寬 (cm)</th>
+              <th style="padding:10px 8px;font-weight:700;">衣長 (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:var(--card);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">XS</td>
+              <td style="padding:9px 8px;">46</td>
+              <td style="padding:9px 8px;">39</td>
+              <td style="padding:9px 8px;">63</td>
+            </tr>
+            <tr style="background:var(--surface);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">S</td>
+              <td style="padding:9px 8px;">49</td>
+              <td style="padding:9px 8px;">41</td>
+              <td style="padding:9px 8px;">66</td>
+            </tr>
+            <tr style="background:var(--card);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">M</td>
+              <td style="padding:9px 8px;">52</td>
+              <td style="padding:9px 8px;">43</td>
+              <td style="padding:9px 8px;">69</td>
+            </tr>
+            <tr style="background:var(--surface);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">L</td>
+              <td style="padding:9px 8px;">55</td>
+              <td style="padding:9px 8px;">45</td>
+              <td style="padding:9px 8px;">72</td>
+            </tr>
+            <tr style="background:var(--card);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">XL</td>
+              <td style="padding:9px 8px;">58</td>
+              <td style="padding:9px 8px;">47</td>
+              <td style="padding:9px 8px;">75</td>
+            </tr>
+            <tr style="background:var(--surface);">
+              <td style="padding:9px 8px;font-weight:700;color:var(--lane);">2XL</td>
+              <td style="padding:9px 8px;">62</td>
+              <td style="padding:9px 8px;">50</td>
+              <td style="padding:9px 8px;">78</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:11.5px;color:var(--muted);padding:8px 14px;margin:0;background:var(--card);">
+          ※ 以上尺寸為平鋪量測，實際穿著請加 2–4 cm 寬鬆度，建議介於兩個尺寸時選大一號。
+        </p>
+      </div>
+    </div>
+
     <div id="roster"></div>
   </div>
 
@@ -1317,6 +1383,19 @@ function showSuccessScreen(data){
   document.getElementById('formWrap').style.display    = 'none';
   document.getElementById('successScreen').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── 尺寸表展開/收合 ──
+function toggleSizeChart(){
+  const body  = document.getElementById('sizeChartBody');
+  const arrow = document.getElementById('sizeChartArrow');
+  const btn   = document.getElementById('sizeChartToggle');
+  const open  = body.style.display === 'none';
+  body.style.display    = open ? 'block' : 'none';
+  arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+  btn.querySelector('span:first-child').textContent = open
+    ? '📐 點擊收合尺寸表'
+    : '📐 點擊查看尺寸表';
 }
 
 // ── 免責聲明展開/收合 ──
