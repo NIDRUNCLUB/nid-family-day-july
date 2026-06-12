@@ -1075,9 +1075,9 @@ option{background:var(--surface);}
   function drawRunner(p, col, legPhase, hasBaton){
     ctx.save();
     ctx.translate(p.x, p.y);
-    // 只旋轉身體朝向跑道切線方向，但腳的繪製用世界座標補回來
-    const angle = Math.atan2(p.ty, p.tx) + Math.PI/2;
-    ctx.rotate(angle);
+    // 頭永遠朝上：不旋轉，只用 tx 判斷跑者面朝方向
+    // tx > 0 = 向右跑，tx < 0 = 向左跑，用 scale 鏡像
+    if(p.tx < 0) ctx.scale(-1, 1);
 
     const lp = legPhase;
     const { jersey, skin } = col;
