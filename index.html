@@ -728,7 +728,8 @@ option{background:var(--surface);}
     </div>
     <div class="success-card">
       <div class="success-card-title">隊伍資訊</div>
-      <div class="success-team-row"><span>隊伍名稱</span><span id="sc-team">—</span></div>
+      <div class="success-team-row"><span>戰隊選擇</span><span id="sc-teamgroup">—</span></div>
+      <div class="success-team-row"><span>戰隊名稱</span><span id="sc-team">—</span></div>
       <div class="success-team-row"><span>隊長姓名</span><span id="sc-captain">—</span></div>
       <div class="success-team-row"><span>聯絡電話</span><span id="sc-phone">—</span></div>
       <div class="success-team-row"><span>Email</span><span id="sc-email">—</span></div>
@@ -1361,7 +1362,8 @@ loadTeamCount();
 
 // ── 顯示確認畫面 ──
 function showSuccessScreen(data){
-  document.getElementById('sc-team').textContent    = `${data.teamGroup} ／ ${data.teamName}`;
+  document.getElementById('sc-teamgroup').textContent = data.teamGroup;
+  document.getElementById('sc-team').textContent      = data.teamName;
   document.getElementById('sc-captain').textContent = data.captainName;
   document.getElementById('sc-phone').textContent   = data.captainPhone;
   document.getElementById('sc-email').textContent   = data.captainEmail;
