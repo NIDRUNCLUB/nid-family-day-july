@@ -1481,6 +1481,24 @@ async function handleSubmit(){
       loadTeamCount();
       return;
     }
+    if(data.status === 'duplicate'){
+      showMsg('error','此戰隊已完成報名，請勿重複送出。如有問題請聯繫小編。');
+      btn.disabled = false;
+      btn.textContent = '送出報名表單';
+      return;
+    }
+    if(data.status === 'error'){
+      showMsg('error', data.message || '送出失敗，請檢查填寫內容後再試。');
+      btn.disabled = false;
+      btn.textContent = '送出報名表單';
+      return;
+    }
+    if(data.status !== 'ok'){
+      showMsg('error','送出失敗，請稍後再試或聯絡主辦。');
+      btn.disabled = false;
+      btn.textContent = '送出報名表單';
+      return;
+    }
     // 成功
     showSuccessScreen({ teamGroup, teamName, captainName, captainPhone, captainEmail, runners });
     loadTeamCount();
